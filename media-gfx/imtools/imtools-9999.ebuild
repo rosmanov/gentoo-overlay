@@ -14,24 +14,37 @@ DOCS="README.md LICENSE"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="debug +threads extra"
+IUSE="debug profiler +threads boost extra"
+REQUIRED_USE="
+  profiler? ( debug )
+  boost? ( threads )
+"
 
 DEPEND="
 	media-libs/opencv
 	sys-libs/glibc
+	threads? (
+	  boost? (
+		dev-libs/boost[threads]
+		dev-cpp/threadpool
+	  )
+	)
 "
 RDEPEND="${DEPEND}"
+
 
 src_configure() {
 	local mycmakeargs=(
 	  -DCMAKE_INSTALL_PREFIX=/usr
-	  $(cmake-utils_use_with debug)
-	  $(cmake-utils_use_with threads)
-	  $(cmake-utils_use_with extra)
+	  $(cmake-utils_use debug IMTOOLS_DEBUG)
+	  $(cmake-utils_use threads IMTOOLS_THREADS)
+	  $(cmake-utils_use boost IMTOOLS_THREADS_BOOST)
+	  $(cmake-utils_use extra IMTOOLS_EXTRA)
+	  $(cmake-utils_use profiler IMTOOLS_DEBUG_PROFILER)
 	)
 
 	if use debug; then
-		mycmakeargs+=( "-DIMTOOLS_DEBUG=ON" )
+		#mycmakeargs+=( "-DIMTOOLS_DEBUG=ON" )
 		CMAKE_BUILD_TYPE="Debug"
 	fi
 
