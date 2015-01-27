@@ -9,7 +9,7 @@
       <name><![CDATA[Ruslan Osmanov]]></name>
       <email>rrosmanov@gmail.com</email>
     </owner>
-    <source type="git">git://bitbucket.org/osmanov/imtools.git</source>
+    <source type="git">https://osmanov@bitbucket.org/osmanov/gentoo-overlay.git</source>
     <feed>https://bitbucket.org/osmanov/gentoo-overlay/rss</feed>
   </repo>
 </repositories>
