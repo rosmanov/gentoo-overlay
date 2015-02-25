@@ -4,16 +4,23 @@
 
 EAPI=5
 
-inherit base cmake-utils git-r3
+if [[ ${PV} == "9999" ]] ; then
+	EGIT_REPO_URI="http://bitbucket.org/osmanov/${PN}.git"
+	vcs=git-2
+else
+	SRC_URI=""
+	KEYWORDS="~amd64 ~x86"
+fi
+
+inherit $vcs base cmake-utils git-r3
 
 DESCRIPTION="Some tools for image manipulation by means of the OpenCV library"
 HOMEPAGE="https://bitbucket.org/osmanov/imtools/"
-EGIT_REPO_URI="http://bitbucket.org/osmanov/${PN}.git"
 
 DOCS="README.md LICENSE"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+
 IUSE="debug profiler +threads boost extra"
 REQUIRED_USE="
   profiler? ( debug )
