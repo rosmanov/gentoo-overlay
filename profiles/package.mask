@@ -1,0 +1,3 @@
+# Osmanov Ruslan <rrosmanov@gmail.com> (26 Feb 2015)
+# Masked live ebuild
+=media-gfx/imtools-9999

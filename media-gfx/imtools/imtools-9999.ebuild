@@ -23,22 +23,21 @@ SLOT="0"
 
 IUSE="debug profiler +threads boost extra"
 REQUIRED_USE="
-  profiler? ( debug )
-  boost? ( threads )
+profiler? ( debug )
+boost? ( threads )
 "
 
 DEPEND="
 	media-libs/opencv
 	sys-libs/glibc
 	threads? (
-	  boost? (
+	boost? (
 		dev-libs/boost[threads]
 		dev-cpp/threadpool
 	  )
 	)
 "
 RDEPEND="${DEPEND}"
-
 
 src_configure() {
 	local mycmakeargs=(

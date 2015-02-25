@@ -16,8 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="debug profiler +threads boost extra"
 REQUIRED_USE="
-  profiler? ( debug )
-  boost? ( threads )
+profiler? ( debug )
+boost? ( threads )
 "
 
 DEPEND="

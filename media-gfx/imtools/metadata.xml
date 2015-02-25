@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+<email>rrosmanov@gmail.com</email>
+<name>Ruslan Osmanov</name>
+<description>Maintainer.</description>
+</maintainer>
+<use>
+<flag name="extra">Whether to build extra tools.</flag>
+<flag name="debug">Whether to turn on debug mode.</flag>
+<flag name="profiler">Whether to turn on profiling.</flag>
+<flag name="threads">Whether to use threading.</flag>
+<flag name="boost">Whether to use Boost library for threading.</flag>
+</use>
+</pkgmetadata>
