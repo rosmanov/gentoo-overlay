@@ -3,7 +3,7 @@
 <repositories xmlns="" version="1.0">
   <repo quality="experimental" status="unofficial">
     <name><![CDATA[osmanov-overlay]]></name>
-    <description><![CDATA[Gentoo overlay for Ruslan Osmanov's projects]]></description>
+    <description><![CDATA[Gentoo overlay for Ruslan Osmanov's projects plus some packages missing in official portage.]]></description>
     <homepage>https://bitbucket.org/osmanov/gentoo-overlay</homepage>
     <owner>
       <name><![CDATA[Ruslan Osmanov]]></name>
