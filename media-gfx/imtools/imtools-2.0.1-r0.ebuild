@@ -8,7 +8,7 @@ inherit vcs-snapshot cmake-utils
 
 DESCRIPTION="Some tools for image manipulation by means of the OpenCV library"
 HOMEPAGE="https://bitbucket.org/osmanov/imtools/"
-SRC_URI="https://bitbucket.org/osmanov/imtools/get/${PV}-dev-r1.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://bitbucket.org/osmanov/imtools/get/${PV}-dev.tar.gz -> ${P}.tar.gz"
 
 DOCS="README.md LICENSE"
 LICENSE="GPL-2"
