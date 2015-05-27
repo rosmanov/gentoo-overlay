@@ -5,7 +5,7 @@
 EAPI="5"
 PHP_EXT_NAME="redis"
 PHP_EXT_INI="yes"
-USE_PHP="php5-3 php5-4 php5-5"
+USE_PHP="php5-3 php5-4 php5-5 php5-6"
 inherit php-ext-source-r2 confutils depend.php git-2
 
 MY_PV="9999"
