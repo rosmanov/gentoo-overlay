@@ -19,7 +19,7 @@ RDEPEND="
   dev-perl/yaml
   dev-perl/HTTP-Message
   dev-perl/HTTP-Date
-  dev-perl/LWP-UserAgent
+  dev-perl/libwww-perl
   dev-perl/JSON
 "
 DEPEND="${RDEPEND}"
