@@ -15,7 +15,7 @@ EGIT_REPO_URI="https://github.com/nicolasff/phpredis.git"
 EGIT_BRANCH="php7"
 
 LICENSE="PHP-3"
-SLOT="0"
+SLOT="0/1"
 KEYWORDS="~amd64 ~ia64 ~x86"
 IUSE=""
 
