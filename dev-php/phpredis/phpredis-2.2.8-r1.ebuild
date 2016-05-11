@@ -8,7 +8,7 @@ PHP_EXT_INI="yes"
 USE_PHP="php7-0"
 inherit php-ext-source-r2 confutils depend.php git-r3
 
-MY_PV="9999"
+MY_PV="${PV/rc/RC}"
 DESCRIPTION="The phpredis extension provides an API for communicating with the Redis key-value store."
 HOMEPAGE="https://github.com/nicolasff/phpredis"
 EGIT_REPO_URI="https://github.com/nicolasff/phpredis.git"
