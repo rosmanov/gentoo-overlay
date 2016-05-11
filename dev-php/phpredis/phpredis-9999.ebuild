@@ -15,7 +15,7 @@ EGIT_REPO_URI="https://github.com/nicolasff/phpredis.git"
 
 LICENSE="PHP-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+#KEYWORDS="amd64 x86"
 IUSE=""
 
 # make test would just run php's test and as such need the full php source
