@@ -1,0 +1,9 @@
+min_num_slots               Min number of ring slots.
+perfect_rules_hash_size     Perfect rules hash size.
+transparent_mode            (deprecated)
+enable_debug                Set to 1 to enable PF_RING debug tracing into the syslog.
+enable_tx_capture           Set to 1 to capture outgoing packets.
+enable_frag_coherence       Set to 1 to handle fragments (flow coherence) in clusters.
+enable_ip_defrag            Set to 1 to enable IP defragmentation(only rx traffic is defragmentead.
+quick_mode                  Set to 1 to run at full speed but with up to one socket per interface.
+bypass_interfaces           Comma separated list of interfaces where bypass will be enabled on link down.
