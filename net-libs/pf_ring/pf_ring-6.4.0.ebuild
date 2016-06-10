@@ -74,21 +74,22 @@ src_compile() {
 
 src_install() {
 	cd userland/lib
-	if use static-libs ; then
-		emake DESTDIR="${D}" install-static
+	default
+	# remove static libraries (--disable-static does not work)
+	if ! use static-libs ; then
+		find "${ED}" -name '*.a' -exec rm {} + || die
 	fi
-	emake DESTDIR="${D}" install-shared
+	prune_libtool_files
 	cd -
 
 	if use pcap ; then
 		cd userland/libpcap
-
-		if use static-libs; then
-			emake DESTDIR="${D}" install-archive || \
-				die "emake install-archive failed"
+		default
+		# remove static libraries (--disable-static does not work)
+		if ! use static-libs ; then
+			find "${ED}" -name '*.a' -exec rm {} + || die
 		fi
-		emake DESTDIR="${D}" install-shared || \
-			die "emake install-shared failed"
+		prune_libtool_files
 		cd -
 	fi
 }
