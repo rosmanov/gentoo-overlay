@@ -21,7 +21,7 @@ IUSE="+pcap +static-libs +redis +rdi"
 DEPEND="
 	=sys-kernel/pf_ring-kmod-${PV}
 	pcap? (
-		>=net-libs/libpcap-${LIBPCAP_VER}-r2:pfring=
+		~net-libs/libpcap-${LIBPCAP_VER}:pfring=
 	)
 	redis? ( dev-db/redis )
 "

@@ -23,7 +23,7 @@ DEPEND="
 	!net-libs/libpcap:0
 	bluetooth? ( net-wireless/bluez )
 	dbus? ( sys-apps/dbus )
-	=net-libs/pf_ring-${PF_RING_VER}[redis?,rdi?]
+	~net-libs/pf_ring-${PF_RING_VER}[redis?,rdi?]
 "
 RDEPEND="${DEPEND}"
 
