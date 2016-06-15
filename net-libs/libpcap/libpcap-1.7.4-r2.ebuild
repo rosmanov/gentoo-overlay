@@ -6,24 +6,24 @@ EAPI=5
 
 inherit eutils
 
-MY_P="PF_RING-6.4.0"
+PF_RING_VER="6.4.0"
+MY_P="PF_RING-${PF_RING_VER}"
 
 DESCRIPTION="PF_RING-capable libpcap library"
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
 SRC_URI="mirror://sourceforge/ntop/PF_RING/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="pfring"
 
 KEYWORDS="~amd64 ~x86"
 IUSE="+bluetooth +usb +dbus +ipv6 +static-libs +redis +rdi"
 DEPEND="
-	=sys-kernel/pf_ring-kmod-${PV}
-	!net-libs/libpcap
+	=sys-kernel/pf_ring-kmod-${PF_RING_VER}
+	!net-libs/libpcap:0
 	bluetooth? ( net-wireless/bluez )
 	dbus? ( sys-apps/dbus )
-	redis? ( net-libs/pf_ring[redis] )
-	rdi? ( net-libs/pf_ring[rdi] )
+	=net-libs/pf_ring-${PF_RING_VER}[redis?,rdi?]
 "
 RDEPEND="${DEPEND}"
 

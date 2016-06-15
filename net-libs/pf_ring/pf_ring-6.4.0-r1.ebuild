@@ -7,6 +7,7 @@ EAPI=5
 inherit eutils
 
 MY_P="PF_RING-${PV}"
+LIBPCAP_VER="1.7.4"
 
 DESCRIPTION="Libraries for PF_RING kernel module."
 HOMEPAGE="http://www.ntop.org/products/pf_ring/"
@@ -16,31 +17,17 @@ LICENSE="GPL-2"
 SLOT="0"
 
 KEYWORDS="~amd64 ~x86"
-IUSE="+pcap +bluetooth +usb +dbus +static-libs +ipv6 +redis +rdi"
+IUSE="+pcap +static-libs +redis +rdi"
 DEPEND="
 	=sys-kernel/pf_ring-kmod-${PV}
 	pcap? (
-		!net-libs/libpcap
-		bluetooth? ( net-wireless/bluez )
-		dbus? ( sys-apps/dbus )
+		>=net-libs/libpcap-${LIBPCAP_VER}-r2:pfring=
 	)
 	redis? ( dev-db/redis )
 "
 RDEPEND="${DEPEND}"
-REQUIRED_USE="
-	pcap? ( || ( bluetooth usb dbus ) )
-"
 
 S="${WORKDIR}/${MY_P}"
-
-src_prepare() {
-	if use pcap ; then
-		cd userland/libpcap
-		mkdir -p bluetooth || die
-		cp "${FILESDIR}"/mgmt.h bluetooth/ || die
-		cd -
-	fi
-}
 
 src_configure() {
 	cd userland/lib
@@ -48,28 +35,12 @@ src_configure() {
 		$(use_enable redis) \
 		$(use_enable rdi)
 	cd -
-
-	if use pcap ; then
-		cd userland/libpcap
-		econf \
-			$(use_enable bluetooth) \
-			$(use_enable usb) \
-			$(use_enable dbus) \
-			$(use_enable ipv6)
-		cd -
-	fi
 }
 
 src_compile() {
 	cd userland/lib
 	emake
 	cd -
-
-	if use pcap ; then
-		cd userland/libpcap
-		default
-		cd -
-	fi
 }
 
 src_install() {
@@ -81,15 +52,4 @@ src_install() {
 	fi
 	prune_libtool_files
 	cd -
-
-	if use pcap ; then
-		cd userland/libpcap
-		default
-		# remove static libraries (--disable-static does not work)
-		if ! use static-libs ; then
-			find "${ED}" -name '*.a' -exec rm {} + || die
-		fi
-		prune_libtool_files
-		cd -
-	fi
 }
