@@ -4,7 +4,8 @@
 
 EAPI=5
 
-inherit eutils
+inherit flag-o-matic eutils 
+
 
 MY_P="PF_RING-${PV}"
 LIBPCAP_VER="1.7.4"
@@ -29,9 +30,14 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
+src_prepare() {
+	use debug && sed -i -e 's%^\s*//\s*#define *RING_DEBUG%#define RING_DEBUG%g' userland/lib/pfring.c
+	use debug && sed -i -e 's%^\s*//\s*#define *RING_DEBUG%#define RING_DEBUG%g' userland/lib/pfring_mod.c
+}
+
 src_configure() {
 	cd userland/lib
-	use debug && append-flags "-DRING_DEBUG=1"
+	use debug && append-cppflags "-DRING_DEBUG=1"
 	econf \
 		$(use_enable redis) \
 		$(use_enable rdi)
@@ -40,7 +46,7 @@ src_configure() {
 
 src_compile() {
 	cd userland/lib
-	use debug && append-flags "-DRING_DEBUG=1"
+	use debug && append-cppflags "-DRING_DEBUG=1"
 	emake
 	cd -
 }
