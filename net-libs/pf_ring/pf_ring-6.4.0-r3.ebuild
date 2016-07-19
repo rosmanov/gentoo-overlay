@@ -23,9 +23,6 @@ DEPEND="
 	redis? ( dev-db/redis )
 "
 RDEPEND="
-	pcap? (
-		~net-libs/libpcap-${LIBPCAP_VER}:pfring=
-	)
   =sys-kernel/pf_ring-kmod-${PV}
   ${DEPEND}
 "
