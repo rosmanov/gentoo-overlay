@@ -1,0 +1,10 @@
+--- pythonqt-9999/generator/CMakeLists.txt.auto-diff-temp	2012-11-30 17:02:28.754418411 +0100
++++ pythonqt-9999/generator/CMakeLists.txt	2012-11-30 17:02:58.158429034 +0100
+@@ -158,5 +158,5 @@
+ 
+ install(TARGETS ${PROJECT_NAME}
+         RUNTIME DESTINATION bin
+-        LIBRARY DESTINATION lib
+-        ARCHIVE DESTINATION lib)
++        LIBRARY DESTINATION lib${LIB_SUFFIX}
++        ARCHIVE DESTINATION lib${LIB_SUFFIX})
