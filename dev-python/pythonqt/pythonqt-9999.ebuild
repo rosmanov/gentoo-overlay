@@ -20,7 +20,7 @@ ESVN_REPO_URI="https://pythonqt.svn.sourceforge.net/svnroot/pythonqt/trunk"
 LICENSE="LGPL-2.1"
 SLOT="osmanov"
 KEYWORDS=""
-IUSE=""
+IUSE="+extensions"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -36,7 +36,6 @@ EPATCH_OPTS="--binary"
 
 src_prepare() {
 	subversion_src_prepare
-
 	eqmake5 -recursive ${MY_PN}.pro
 }
 
@@ -45,6 +44,11 @@ src_install() {
 
 	insinto "/usr/include/PythonQt"
 	doins ${S}/src/*.h || return ${?}
+	dolib ${S}/lib/libPythonQt.so*
 
-	dolib ${S}/lib/lib*
+	if use extensions ; then
+		insinto "/usr/include/PythonQt/extensions/PythonQt_QtAll"
+		doins ${S}/extensions/PythonQt_QtAll/*.h || return ${?}
+		dolib ${S}/lib/libPythonQt_QtAll.so*
+	fi
 }
