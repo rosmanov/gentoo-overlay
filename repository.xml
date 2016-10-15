@@ -4,12 +4,12 @@
   <repo quality="experimental" status="unofficial">
     <name><![CDATA[osmanov-overlay]]></name>
     <description><![CDATA[Gentoo overlay for Ruslan Osmanov's projects plus some packages missing in official portage.]]></description>
-    <homepage>https://bitbucket.org/osmanov/gentoo-overlay</homepage>
+    <homepage>https://github.com/rosmanov/gentoo-overlay</homepage>
     <owner>
       <name><![CDATA[Ruslan Osmanov]]></name>
       <email>rrosmanov@gmail.com</email>
     </owner>
-    <source type="git">https://osmanov@bitbucket.org/osmanov/gentoo-overlay.git</source>
-    <feed>https://bitbucket.org/osmanov/gentoo-overlay/rss</feed>
+    <source type="git">https://github.com/rosmanov/gentoo-overlay.git</source>
+    <feed>https://github.com/rosmanov/gentoo-overlay/commits/master.atom</feed>
   </repo>
 </repositories>
