@@ -5,5 +5,5 @@ This is a Gentoo overlay for my projects and for packages missing in official po
 # Adding the overlay
 
 ```
-layman -f -o https://bitbucket.org/osmanov/gentoo-overlay/raw/master/repository.xml -a osmanov-overlay
+layman -f -o https://raw.githubusercontent.com/rosmanov/gentoo-overlay/master/repository.xml -a osmanov-overlay
 ```
