@@ -1,4 +1,4 @@
-# Copyright 2015 Ruslan Osmanov <rrosmanov@gmail.com>
+# Copyright 2016 Ruslan Osmanov <rrosmanov@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -6,9 +6,11 @@ EAPI=5
 
 inherit vcs-snapshot cmake-utils
 
-DESCRIPTION="Some tools for image manipulation by means of the OpenCV library"
-HOMEPAGE="https://bitbucket.org/osmanov/imtools/"
-SRC_URI="https://bitbucket.org/osmanov/imtools/get/${PV}-dev.tar.gz -> ${P}.tar.gz"
+DESCRIPTION="Tools for image manipulation by means of the OpenCV library"
+#HOMEPAGE="https://bitbucket.org/osmanov/imtools/"
+HOMEPAGE="https://github.com/rosmanov/imtools"
+#SRC_URI="https://bitbucket.org/osmanov/imtools/get/${PV}-dev.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/rosmanov/imtools/archive/${PV}-dev.tar.gz -> ${P}.tar.gz"
 
 DOCS="README.md LICENSE"
 LICENSE="GPL-2"
