@@ -6,7 +6,7 @@ EAPI="5"
 PHP_EXT_NAME="redis"
 PHP_EXT_INI="yes"
 USE_PHP="php7-0 php7-1"
-inherit php-ext-source-r2 confutils depend.php git-r3
+inherit php-ext-source-r2 confutils git-r3
 
 MY_PV="${PV/rc/RC}"
 DESCRIPTION="The phpredis extension provides an API for communicating with the Redis key-value store."
