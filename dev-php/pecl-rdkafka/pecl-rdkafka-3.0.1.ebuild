@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 
 PHP_EXT_NAME="rdkafka"
 PHP_EXT_INI="yes"
@@ -13,7 +13,7 @@ USE_PHP="php7-1"
 
 MY_PV="${PV/rc/RC}"
 
-inherit php-ext-pecl-r2 confutils eutils
+inherit php-ext-pecl-r3
 
 KEYWORDS="~amd64 ~ia64 ~x86"
 LICENSE="PHP-3.01"
@@ -28,6 +28,6 @@ RDEPEND="${DEPEND}"
 IUSE=""
 
 src_configure() {
-	my_conf="--with-rdkafka"
-	php-ext-source-r2_src_configure
+    local PHP_EXT_ECONF_ARGS=( "--with-rdkafka" )
+    php-ext-source-r3_src_configure
 }
