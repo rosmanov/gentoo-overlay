@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="cdt +java php ruby doc"
 
-COMMON_DEPEND=">=dev-util/eclipse-sdk-bin-4.5"
+COMMON_DEPEND=">=dev-util/eclipse-sdk-bin-4.6"
 DEPEND="${COMMON_DEPEND}
 	>=virtual/jdk-1.5
 doc? ( dev-python/sphinx )"
@@ -27,7 +27,7 @@ RDEPEND="${COMMON_DEPEND}
 	dev-java/nailgun"
 
 S=${WORKDIR}/${MY_P}
-eclipse_home="/opt/eclipse-sdk-bin-4.5/"
+eclipse_home="/opt/eclipse-sdk-bin-4.6/"
 vim_home="/usr/share/vim/vimfiles/"
 mypkg_plugins=""
 
