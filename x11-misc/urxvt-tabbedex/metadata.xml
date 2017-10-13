@@ -5,8 +5,5 @@
     <email>rrosmanov@gmail.com</email>
     <name>Ruslan Osmanov</name>
   </maintainer>
-  <upstream>
-    <remote-id type="github">stepb/urxvt-tabbedex</remote-id>
-  </upstream>
 </pkgmetadata>
 
