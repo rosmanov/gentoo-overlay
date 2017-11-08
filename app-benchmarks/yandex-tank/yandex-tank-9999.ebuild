@@ -23,7 +23,6 @@ RDEPEND="${PYTHON_DEPS}
 	dev-python/psutil
 	dev-python/ipaddr
 	dev-python/lxml
-	app-misc/phantom
 	jmeter? ( app-benchmarks/jmeter )
 	mysql? ( dev-python/sqlalchemy[mysql] )
 	postgres? ( dev-python/sqlalchemy[postgres] )"
