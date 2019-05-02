@@ -73,10 +73,9 @@ multilib_src_configure() {
 }
 
 src_install() {
-	echo ">>>>>> insinto ${ROOT%/}/usr/include/mysql/"
-	echo '>>>>>> doins ' "${S}/include/hash.h"
 	insinto "${ROOT%/}/usr/include/mysql/"
 	doins "${S}/include/hash.h"
+	doins "${S}/include/my_global.h"
 }
 
 multilib_src_install_all() {
