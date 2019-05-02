@@ -72,12 +72,6 @@ multilib_src_configure() {
 	cmake-utils_src_configure
 }
 
-src_install() {
-	insinto "${ROOT%/}/usr/include/mysql/"
-	doins "${S}/include/hash.h"
-	doins "${S}/include/my_global.h"
-}
-
 multilib_src_install_all() {
 	if ! use static-libs ; then
 		find "${ED}" -name "*.a" -delete || die
@@ -85,6 +79,7 @@ multilib_src_install_all() {
 
 	insinto "${ROOT%/}/usr/include/mysql/"
 	doins "${S}/include/hash.h"
+	doins "${S}/include/my_global.h"
 }
 
 pkg_preinst() {
