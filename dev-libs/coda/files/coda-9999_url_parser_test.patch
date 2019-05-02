@@ -1,0 +1,28 @@
+commit 3ef775ee7ddb837da8ae2692264f399b2a9d3765
+Author: Ruslan Osmanov <rrosmanov@gmail.com>
+Date:   Thu May 2 14:21:36 2019 +0300
+
+    Fixed GCC warnings
+
+diff --git a/tests/url_parser/test.cpp b/tests/url_parser/test.cpp
+index 12b1951..c094f58 100644
+--- a/tests/url_parser/test.cpp
++++ b/tests/url_parser/test.cpp
+@@ -1,7 +1,7 @@
+ #include <stdio.h>
+ #include <getopt.h>
+ #include <stdlib.h>
+-#include <string.h>
++#include <cstring>
+ #include <inttypes.h>
+ #include <coda/url.hpp>
+ #include <coda/url_parser.hpp>
+@@ -169,7 +169,7 @@ int main(int argc, char **argv)
+     int i;
+ 
+     urlq_getopt_t opts;
+-    memset(&opts, 0, sizeof(opts));
++    std::memset(static_cast<void*>(&opts), 0, sizeof(opts));
+ 
+     if (0 != urlq_getopt_parse(argc, argv, &opts))
+     {

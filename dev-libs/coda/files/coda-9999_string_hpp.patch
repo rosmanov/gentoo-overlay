@@ -1,0 +1,13 @@
+diff --git a/coda/string.hpp b/coda/string.hpp
+index f18a541..471e060 100644
+--- a/coda/string.hpp
++++ b/coda/string.hpp
+@@ -1,7 +1,7 @@
+ #ifndef __CODA_STRING_HPP__
+ #define __CODA_STRING_HPP__
+ 
+-#include <coda/coda.h>
++#include "coda.h"
+ #include <inttypes.h>
+ #include <stdint.h>
+ #include <string>
