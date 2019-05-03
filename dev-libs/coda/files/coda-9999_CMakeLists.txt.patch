@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cbc9002..9066ad7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,6 +7,7 @@ USE_PACKAGE (expat expat.h)
+ AUX_SOURCE_DIRECTORY (coda/ SRC_coda)
+ ADD_LIBRARY (coda ${SRC_coda})
+ TARGET_LINK_LIBRARIES (coda ${LIB_expat} pthread)
++SET_PROPERTY (TARGET coda PROPERTY POSITION_INDEPENDENT_CODE ON)
+ INSTALL (TARGETS coda DESTINATION lib)
+ INSTALL (DIRECTORY coda/ DESTINATION include/coda FILES_MATCHING PATTERN "*.h")
+ INSTALL (DIRECTORY coda/ DESTINATION include/coda FILES_MATCHING PATTERN "*.hpp")
