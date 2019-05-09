@@ -37,11 +37,14 @@ src_prepare() {
 }
 
 src_install() {
-	into 'opt/Waves Client'
-	dobin 'opt/Waves Client/waves-client'
+	exeinto 'opt/Waves Client'
+	doexe 'opt/Waves Client/waves-client'
 
 	into 'opt/Waves Client/'
 	dolib.so 'opt/Waves Client/'*.so
+	for lib in "opt/Waves Client/"$(get_libdir)/*.so; do
+		dosym ../"${lib}" "${lib}"
+	done
 
 	insinto 'opt/Waves Client'
 	doins 'opt/Waves Client/'*.{bin,dat,pak}
@@ -49,7 +52,7 @@ src_install() {
 	insinto 'opt/Waves Client/locales'
 	doins 'opt/Waves Client/locales/'*.pak
 
-	insinto 'opt/Waves Client/locales'
+	insinto 'opt/Waves Client/resources'
 	doins 'opt/Waves Client/resources/'*.asar
 
 	domenu usr/share/applications/waves-client.desktop
