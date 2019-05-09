@@ -41,9 +41,9 @@ src_install() {
 	doexe 'opt/Waves Client/waves-client'
 
 	into 'opt/Waves Client/'
-	dolib.so 'opt/Waves Client/'*.so
-	for lib in "opt/Waves Client/"$(get_libdir)/*.so; do
-		dosym ../"${lib}" "${lib}"
+	for lib in libffmpeg.so libnode.so ; do
+		insinto "opt/Waves Client"
+		doins "opt/Waves Client/${lib}"
 	done
 
 	insinto 'opt/Waves Client'
