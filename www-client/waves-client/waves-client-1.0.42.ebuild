@@ -44,6 +44,7 @@ src_install() {
 	for lib in libffmpeg.so libnode.so ; do
 		insinto "opt/Waves Client"
 		doins "opt/Waves Client/${lib}"
+		chmod 0755 "opt/Waves Client/${lib}"
 	done
 
 	insinto 'opt/Waves Client'
