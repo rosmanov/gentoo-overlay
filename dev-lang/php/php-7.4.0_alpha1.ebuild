@@ -18,7 +18,7 @@ LICENSE="PHP-3.01
 	gd? ( gd )
 	unicode? ( BSD-2 LGPL-2.1 )"
 
-SLOT="$(ver_cut 1-2)"
+SLOT="7.4"
 KEYWORDS="alpha amd64 ~arm arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 
 S="${WORKDIR}/php-src-${PN}-${MY_PV}"
