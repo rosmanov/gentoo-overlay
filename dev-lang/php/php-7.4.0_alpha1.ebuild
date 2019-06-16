@@ -3,12 +3,13 @@
 
 EAPI=7
 
-inherit flag-o-matic systemd eutils
+inherit flag-o-matic systemd autotools
 
 MY_PV="${PV//_/}"
 DESCRIPTION="The PHP language runtime engine"
 HOMEPAGE="https://php.net/"
 SRC_URI="https://github.com/php/php-src/archive/${P}.tar.gz"
+
 
 LICENSE="PHP-3.01
 	BSD
@@ -34,13 +35,13 @@ IUSE="${IUSE}
 IUSE="${IUSE} acl argon2 bcmath berkdb bzip2 calendar cdb cjk
 	coverage +ctype curl debug
 	enchant exif +fileinfo +filter firebird
-	flatfile ftp gd gdbm gmp +hash +iconv imap inifile
-	intl iodbc ipv6 +json kerberos ldap ldap-sasl libedit libressl lmdb
+	flatfile ftp gd gdbm gmp +iconv imap inifile
+	intl iodbc ipv6 +jpeg +json kerberos ldap ldap-sasl libedit libressl lmdb
 	mhash mssql mysql mysqli nls
 	oci8-instant-client odbc +opcache pcntl pdo +phar +posix postgres qdbm
 	readline recode selinux +session session-mm sharedmem
 	+simplexml snmp soap sockets sodium spell sqlite ssl
-	sysvipc systemd test tidy +tokenizer tokyocabinet truetype unicode wddx webp
+	sysvipc systemd test tidy +tokenizer tokyocabinet truetype unicode webp
 	+xml xmlreader xmlwriter xmlrpc xpm xslt zip zip-encryption zlib"
 
 # The supported (that is, autodetected) versions of BDB are listed in
@@ -72,6 +73,7 @@ COMMON_DEPEND="
 	imap? ( virtual/imap-c-client[kerberos=,ssl=] )
 	intl? ( dev-libs/icu:= )
 	iodbc? ( dev-db/libiodbc )
+	jpeg? ( virtual/jpeg:0 )
 	kerberos? ( virtual/krb5 )
 	ldap? ( >=net-nds/openldap-1.2.11 )
 	ldap-sasl? ( dev-libs/cyrus-sasl >=net-nds/openldap-1.2.11 )
@@ -100,7 +102,6 @@ COMMON_DEPEND="
 	tokyocabinet? ( dev-db/tokyocabinet )
 	truetype? ( =media-libs/freetype-2* )
 	unicode? ( dev-libs/oniguruma:= )
-	wddx? ( >=dev-libs/libxml2-2.6.8 )
 	webp? ( media-libs/libwebp:0= )
 	xml? ( >=dev-libs/libxml2-2.6.8 )
 	xmlrpc? ( >=dev-libs/libxml2-2.6.8 virtual/libiconv )
@@ -108,8 +109,7 @@ COMMON_DEPEND="
 	xmlwriter? ( >=dev-libs/libxml2-2.6.8 )
 	xpm? ( x11-libs/libXpm )
 	xslt? ( dev-libs/libxslt >=dev-libs/libxml2-2.6.8 )
-	zip? ( >=sys-libs/zlib-1.2.0.4:0= )
-	zip-encryption? ( >=dev-libs/libzip-1.2.0:= )
+	zip? ( >=sys-libs/zlib-1.2.0.4:0= >=dev-libs/libzip-1.5.1 )
 	zlib? ( >=sys-libs/zlib-1.2.0.4:0= )
 "
 
@@ -117,7 +117,8 @@ RDEPEND="${COMMON_DEPEND}
 	virtual/mta
 	fpm? (
 		selinux? ( sec-policy/selinux-phpfpm )
-		systemd? ( sys-apps/systemd ) )"
+		systemd? ( sys-apps/systemd )
+	)"
 
 # Bison isn't actually needed when building from a release tarball
 # However, the configure script will warn if it's absent or if you
@@ -140,13 +141,10 @@ REQUIRED_USE="
 	gd? ( zlib )
 	simplexml? ( xml )
 	soap? ( xml )
-	wddx? ( xml )
 	xmlrpc? ( || ( xml iconv ) )
 	xmlreader? ( xml )
 	xslt? ( xml )
 	ldap-sasl? ( ldap )
-	mhash? ( hash )
-	phar? ( hash )
 	qdbm? ( !gdbm )
 	readline? ( !libedit )
 	recode? ( !imap !mysqli !mysql )
@@ -269,7 +267,6 @@ src_configure() {
 		$(use_enable ftp ftp)
 		$(use_with nls gettext "${EPREFIX}/usr")
 		$(use_with gmp gmp "${EPREFIX}/usr")
-		$(use_enable hash hash)
 		$(use_with mhash mhash "${EPREFIX}/usr")
 		$(use_with iconv iconv \
 			$(use elibc_glibc || use elibc_musl || use elibc_FreeBSD || echo "${EPREFIX}/usr"))
@@ -278,9 +275,7 @@ src_configure() {
 		$(use_enable json json)
 		$(use_with kerberos kerberos "${EPREFIX}/usr")
 		$(use_enable xml libxml)
-		$(use_with xml libxml-dir "${EPREFIX}/usr")
 		$(use_enable unicode mbstring)
-		$(use_with unicode onig "${EPREFIX}/usr")
 		$(use_with ssl openssl "${EPREFIX}/usr")
 		$(use_with ssl openssl-dir "${EPREFIX}/usr")
 		$(use_enable pcntl pcntl)
@@ -303,13 +298,12 @@ src_configure() {
 		$(use_enable sysvipc sysvshm)
 		$(use_with tidy tidy "${EPREFIX}/usr")
 		$(use_enable tokenizer tokenizer)
-		$(use_enable wddx wddx)
 		$(use_enable xml xml)
 		$(use_enable xmlreader xmlreader)
 		$(use_enable xmlwriter xmlwriter)
 		$(use_with xmlrpc xmlrpc)
 		$(use_with xslt xsl "${EPREFIX}/usr")
-		$(use_enable zip zip)
+		$(use_with zip zip "${EPREFIX}/usr")
 		$(use_with zip-encryption libzip "${EPREFIX}/usr")
 		$(use_with zlib zlib "${EPREFIX}/usr")
 		$(use_enable debug debug)
@@ -334,17 +328,13 @@ src_configure() {
 
 	# Support for the GD graphics library
 	our_conf+=(
-		$(use_with truetype freetype-dir "${EPREFIX}/usr")
-		$(use_enable cjk gd-jis-conv)
-		$(use_with gd jpeg-dir "${EPREFIX}/usr")
-		$(use_with gd png-dir "${EPREFIX}/usr")
-		$(use_with xpm xpm-dir "${EPREFIX}/usr")
+		$(use_with truetype freetype "${EPREFIX}/usr")
+		$(use_with jpeg jpeg)
+		$(use_with webp webp)
+		$(use_with xpm xpm)
 	)
-	if use webp; then
-		our_conf+=( --with-webp-dir="${EPREFIX}/usr" )
-	fi
 	# enable gd last, so configure can pick up the previous settings
-	our_conf+=( $(use_with gd gd) )
+	our_conf+=( $(use_enable gd gd) )
 
 	# IMAP support
 	if use imap ; then
@@ -353,9 +343,6 @@ src_configure() {
 			$(use_with ssl imap-ssl "${EPREFIX}/usr")
 		)
 	fi
-
-	# Interbase/firebird support
-	our_conf+=( $(use_with firebird interbase "${EPREFIX}/usr") )
 
 	# LDAP support
 	if use ldap ; then
@@ -422,7 +409,6 @@ src_configure() {
 	our_conf+=(
 		--with-pcre-regex="${EPREFIX}/usr"
 		--with-pcre-dir="${EPREFIX}/usr"
-		--without-pcre-valgrind
 		--without-pcre-jit
 	)
 
