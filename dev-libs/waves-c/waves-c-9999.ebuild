@@ -1,15 +1,18 @@
 # Copyright 2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=6
 
 CMAKE_IN_SOURCE_BUILD=1
 
-inherit cmake-utils
+inherit cmake-utils git-r3
 
 DESCRIPTION="C library for working with Waves"
 HOMEPAGE="https://github.com/qbcir/waves-c"
-SRC_URI="https://github.com/qbcir/waves-c/archive/master.zip -> ${P}.zip"
+SRC_URI=""
+EGIT_REPO_URI="https://github.com/qbcir/${PN}.git -> ${PN}"
+EGIT_BRANCH="master"
+EGIT_CHECKOUT_DIR="${WORKDIR}/${PN}-${EGIT_BRANCH}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
