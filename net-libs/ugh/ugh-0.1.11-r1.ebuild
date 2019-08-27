@@ -8,8 +8,8 @@ CMAKE_IN_SOURCE_BUILD=1
 inherit cmake-utils
 
 DESCRIPTION="WZ http server"
-HOMEPAGE="https://github.com/qbcir/${PN}"
-SRC_URI="https://github.com/qbcir/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/bachan/${PN}"
+SRC_URI="https://github.com/bachan/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL"
 SLOT="0"
