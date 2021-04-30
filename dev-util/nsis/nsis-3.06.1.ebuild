@@ -44,8 +44,8 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-build.patch"
-	epatch "${FILESDIR}/${P}-64bit.patch"
+	#epatch "${FILESDIR}/${P}-build.patch"
+	#epatch "${FILESDIR}/${P}-64bit.patch"
 
 	# a dirty but effective way of killing generated docs
 	use doc || echo > Docs/src/SConscript
